@@ -13,48 +13,106 @@
 
 <body>
 
-    <!-- Header Section -->
+    <!-- Header -->
     <header>
         <h1>🍔 GrillMaster POS</h1>
         <p>Burger Shop Management System</p>
     </header>
 
-    <!-- Navigation Menu -->
+    <!-- Navigation -->
     <nav>
-        <a href="#">Dashboard</a>
-        <a href="#">New Order</a>
-        <a href="#">Products</a>
-        <a href="#">Customers</a>
-        <a href="#">Orders</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#newOrder">New Order</a>
+        <a href="#products">Products</a>
+        <a href="#customers">Customers</a>
+        <a href="#orders">Orders</a>
     </nav>
 
-    <!-- Main Content -->
+    <!-- Dashboard -->
     <main>
 
-        <h2>Dashboard</h2>
-        <p>Welcome to GrillMaster POS System!</p>
+        <section id="dashboard">
 
-        <!-- Dashboard Cards -->
-        <section class="dashboard">
+            <h2>Dashboard</h2>
+            <p>Welcome to GrillMaster POS System!</p>
 
-            <div class="card">
-                <h3>Total Products</h3>
-                <p>10</p>
+            <div class="dashboard">
+
+                <div class="card">
+                    <h3>Total Products</h3>
+                    <p id="totalProducts">6</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Customers</h3>
+                    <p>25</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Orders</h3>
+                    <p>50</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Sales</h3>
+                    <p>Rs. 25,000</p>
+                </div>
+
             </div>
 
-            <div class="card">
-                <h3>Total Customers</h3>
-                <p>25</p>
+        </section>
+
+        <!-- Products -->
+        <section id="products">
+
+            <h2>Our Products 🍔</h2>
+            <p>Select your favorite food items.</p>
+
+            <div class="product-container" id="productList">
+
+                <!-- Products will display using JavaScript -->
+
             </div>
 
-            <div class="card">
-                <h3>Total Orders</h3>
-                <p>50</p>
-            </div>
+        </section>
 
-            <div class="card">
-                <h3>Total Sales</h3>
-                <p>Rs. 25,000</p>
+        <!-- New Order -->
+        <section id="newOrder">
+
+            <h2>New Order 🛒</h2>
+
+            <div class="cart-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cartItems">
+
+                        <!-- Cart items display here -->
+
+                    </tbody>
+
+                </table>
+
+                <div class="total-section">
+
+                    <h3>Total: Rs. <span id="total">0.00</span></h3>
+
+                    <button class="clear-btn" onclick="clearCart()">
+                        Clear Cart
+                    </button>
+
+                </div>
+
             </div>
 
         </section>
