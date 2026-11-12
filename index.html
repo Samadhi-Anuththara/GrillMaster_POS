@@ -116,6 +116,59 @@
             </div>
 
         </section>
+  
+        
+<!-- Customer Management Section -->
+
+<section id="customers">
+
+    <h2>Customer Management 👥</h2>
+
+    <p>Add and manage your customers.</p>
+
+    <div class="customer-form">
+
+        <h3>Customer Details</h3>
+
+        <input type="text" id="customerName"
+               placeholder="Enter Customer Name">
+
+        <input type="text" id="customerPhone"
+               placeholder="Enter Phone Number">
+
+        <button onclick="addCustomer()" id="customerBtn">
+            Add Customer
+        </button>
+
+    </div>
+
+    <div class="customer-table">
+
+        <h3>Customer List</h3>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="customerList">
+
+                <!-- Customer details display here -->
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
 
     </main>
 

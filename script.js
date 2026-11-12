@@ -165,7 +165,6 @@ function displayCart() {
 
     document.getElementById("total").innerText =
         total.toFixed(2);
-
 }
 
 
@@ -198,3 +197,168 @@ function clearCart() {
 displayProducts();
 
 displayCart();
+
+
+// Customer Array
+
+let customers = [];
+
+let editingCustomerId = null;
+
+
+// Add Customer
+
+function addCustomer() {
+
+    let name = document.getElementById("customerName").value;
+
+    let phone = document.getElementById("customerPhone").value;
+
+    if (name === "" || phone === "") {
+
+        alert("Please enter customer details!");
+
+        return;
+    }
+
+    if (editingCustomerId === null) {
+
+        let customer = {
+
+            id: Date.now(),
+            name: name,
+            phone: phone
+
+        };
+
+        customers.push(customer);
+
+        alert("Customer Added Successfully!");
+
+    } else {
+
+        let customer = customers.find(function(item) {
+            return item.id === editingCustomerId;
+        });
+
+        customer.name = name;
+        customer.phone = phone;
+
+        editingCustomerId = null;
+
+        document.getElementById("customerBtn").innerText =
+            "Add Customer";
+
+        alert("Customer Updated Successfully!");
+
+    }
+
+    clearCustomerForm();
+
+    displayCustomers();
+
+}
+
+
+// Display Customers
+
+function displayCustomers() {
+
+    let customerList = document.getElementById("customerList");
+
+    customerList.innerHTML = "";
+
+    customers.forEach(function(customer) {
+
+        customerList.innerHTML += `
+
+            <tr>
+
+                <td>${customer.id}</td>
+
+                <td>${customer.name}</td>
+
+                <td>${customer.phone}</td>
+
+                <td>
+
+                    <button class="edit-btn"
+                    onclick="editCustomer(${customer.id})">
+                        Edit
+                    </button>
+
+                    <button class="delete-btn"
+                    onclick="deleteCustomer(${customer.id})">
+                        Delete
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+// Edit Customer
+
+function editCustomer(id) {
+
+    let customer = customers.find(function(item) {
+        return item.id === id;
+    });
+
+    document.getElementById("customerName").value =
+        customer.name;
+
+    document.getElementById("customerPhone").value =
+        customer.phone;
+
+    editingCustomerId = id;
+
+    document.getElementById("customerBtn").innerText =
+        "Update Customer";
+
+}
+
+
+// Delete Customer
+
+function deleteCustomer(id) {
+
+    let confirmDelete = confirm(
+        "Are you sure you want to delete this customer?"
+    );
+
+    if (confirmDelete) {
+
+        customers = customers.filter(function(item) {
+            return item.id !== id;
+        });
+
+        displayCustomers();
+
+        alert("Customer Deleted Successfully!");
+
+    }
+
+}
+
+
+// Clear Customer Form
+
+function clearCustomerForm() {
+
+    document.getElementById("customerName").value = "";
+
+    document.getElementById("customerPhone").value = "";
+
+}
+
+
+// Display customers when system starts
+
+displayCustomers();
