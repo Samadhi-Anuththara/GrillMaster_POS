@@ -351,3 +351,27 @@ th {
     cursor: pointer;
     margin: 3px;
 }
+
+
+/* Product Management Form */
+
+#products .customer-form {
+    margin-top: 30px;
+}
+
+#products .customer-form h3 {
+    color: #c62828;
+}
+
+#products .customer-form input {
+    margin: 8px;
+}
+
+#products .customer-table {
+    margin-top: 25px;
+}
+
+#products .customer-table h3 {
+    color: #c62828;
+    margin-bottom: 20px;
+}

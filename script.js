@@ -362,3 +362,206 @@ function clearCustomerForm() {
 // Display customers when system starts
 
 displayCustomers();
+
+
+// Product Editing ID
+
+let editingProductId = null;
+
+
+// Add Product
+
+function addProduct() {
+
+    let name = document.getElementById("productName").value.trim();
+
+    let price = Number(document.getElementById("productPrice").value);
+
+    let icon = document.getElementById("productIcon").value.trim();
+
+    if (name === "" || document.getElementById("productPrice").value === "" || price <= 0) {
+
+        alert("Please enter a valid product name and price!");
+
+        return;
+    }
+
+    if (icon === "") {
+        icon = "🍔";
+    }
+
+    if (editingProductId === null) {
+
+        let product = {
+
+            id: Date.now(),
+            name: name,
+            price: price,
+            icon: icon
+
+        };
+
+        products.push(product);
+
+        alert("Product Added Successfully!");
+
+    } else {
+
+        let product = products.find(function(item) {
+            return item.id === editingProductId;
+        });
+
+        product.name = name;
+        product.price = price;
+        product.icon = icon;
+
+        editingProductId = null;
+
+        document.getElementById("productBtn").innerText =
+            "Add Product";
+
+        alert("Product Updated Successfully!");
+
+    }
+
+    clearProductForm();
+
+    displayProducts();
+
+    displayProductTable();
+
+    document.getElementById("totalProducts").innerText =
+        products.length;
+
+}
+
+
+// Display Product Table
+
+function displayProductTable() {
+
+    let productTableBody =
+        document.getElementById("productTableBody");
+
+    productTableBody.innerHTML = "";
+
+    products.forEach(function(product) {
+
+        productTableBody.innerHTML += `
+
+            <tr>
+
+                <td>${product.id}</td>
+
+                <td>${product.icon} ${product.name}</td>
+
+                <td>Rs. ${product.price.toFixed(2)}</td>
+
+                <td>
+
+                    <button class="edit-btn"
+                    onclick="editProduct(${product.id})">
+                        Edit
+                    </button>
+
+                    <button class="delete-btn"
+                    onclick="deleteProduct(${product.id})">
+                        Delete
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+// Edit Product
+
+function editProduct(id) {
+
+    let product = products.find(function(item) {
+        return item.id === id;
+    });
+
+    document.getElementById("productName").value =
+        product.name;
+
+    document.getElementById("productPrice").value =
+        product.price;
+
+    document.getElementById("productIcon").value =
+        product.icon;
+
+    editingProductId = id;
+
+    document.getElementById("productBtn").innerText =
+        "Update Product";
+
+    document.getElementById("products").scrollIntoView();
+
+}
+
+
+// Delete Product
+
+function deleteProduct(id) {
+
+    let confirmDelete = confirm(
+        "Are you sure you want to delete this product?"
+    );
+
+    if (confirmDelete) {
+
+        let index = products.findIndex(function(item) {
+            return item.id === id;
+        });
+
+        if (index !== -1) {
+
+            products.splice(index, 1);
+
+        }
+
+        // Remove deleted product from cart too
+
+        cart = cart.filter(function(item) {
+            return item.id !== id;
+        });
+
+        displayProducts();
+
+        displayProductTable();
+
+        displayCart();
+
+        document.getElementById("totalProducts").innerText =
+            products.length;
+
+        alert("Product Deleted Successfully!");
+
+    }
+
+}
+
+
+// Clear Product Form
+
+function clearProductForm() {
+
+    document.getElementById("productName").value = "";
+
+    document.getElementById("productPrice").value = "";
+
+    document.getElementById("productIcon").value = "";
+
+}
+
+
+// Display Product Table when system starts
+
+displayProductTable();
